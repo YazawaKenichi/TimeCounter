@@ -9,7 +9,7 @@
 #include <sys/time.h>
 #include <time.h>
 
-#define COUNT 1
+#define COUNT 10
 
 namespace Sub1
 {
