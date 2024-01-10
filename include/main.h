@@ -1,7 +1,9 @@
-#ifndef __MAIN_HPP__
-#define __MAIN_HPP__
+#ifndef __MAIN_H__
+#define __MAIN_H__
 
-#define SEC 1
+#include "TimeCounter.h"
+
+#define SEC 10
 
 #endif
 

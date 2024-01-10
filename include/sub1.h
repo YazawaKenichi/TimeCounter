@@ -1,6 +1,5 @@
-#ifndef __SUB1_HPP__
-#define __SUB1_HPP__
+#ifndef __SUB1_H__
+#define __SUB1_H__
 
-#include "TimeCounter.h"
 #endif
 

@@ -16,9 +16,9 @@ FILE = text
 
 PROGRAM = hoge
 OBJS = $(BINS)/$(MAIN).o $(BINS)/$(SUB1).o $(BINS)/$(SUB2).o
-CODES = $(SRCS)/$(MAIN).c $(SRCS)/$(SUB1).c $(SUB2)/$(SUB2).cpp
+CODES = $(SRCS)/$(MAIN).c $(SRCS)/$(SUB1).c $(SUB2)/$(SUB2).c
 
-.cpp.o:
+.c.o:
 	$(CC) $(CFLAGS) -o $@ -c $< $(PARAM)
 
 $(PROGRAM): $(OBJS)
@@ -48,6 +48,6 @@ $(BINS)/$(MAIN).o: $(SRCS)/$(MAIN).c $(INCS)/$(MAIN).h
 $(BINS)/$(SUB1).o: $(SRCS)/$(SUB1).c $(INCS)/$(SUB1).h
 	$(CC) $(CFLAGS) -o $@ -c $< $(PARAM)
 
-$(BINS)/$(SUB2).o: $(SUB2)/$(SUB2).cpp $(SUB2)/$(SUB2).h
+$(BINS)/$(SUB2).o: $(SUB2)/$(SUB2).c $(SUB2)/$(SUB2).h
 	$(CC) $(CFLAGS) -o $@ -c $< $(PARAM)
 
