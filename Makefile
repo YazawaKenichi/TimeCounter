@@ -10,13 +10,13 @@ INCS = ./include
 BINS = ./bin
 BUILD = ./build
 LIBS = -lm
-CFLAGS = -I$(INCS)
+CFLAGS = -I $(INCS) -I $(SUB2)
 PARAM = -O0
 FILE = text
 
 PROGRAM = hoge
 OBJS = $(BINS)/$(MAIN).o $(BINS)/$(SUB1).o $(BINS)/$(SUB2).o
-CODES = $(SRCS)/$(MAIN).cpp $(SRCS)/$(SUB1).cpp $(SUB2)/$(SUB2).cpp
+CODES = $(SRCS)/$(MAIN).c $(SRCS)/$(SUB1).c $(SUB2)/$(SUB2).cpp
 
 .cpp.o:
 	$(CC) $(CFLAGS) -o $@ -c $< $(PARAM)
@@ -42,12 +42,12 @@ mkdir:
 edit:
 	$(EDITOR) $(EPARAM) $(SUB2)/* $(INCS)/* $(SRCS)/*
 
-$(BINS)/$(MAIN).o: $(SRCS)/$(MAIN).cpp $(INCS)/$(MAIN).hpp
+$(BINS)/$(MAIN).o: $(SRCS)/$(MAIN).c $(INCS)/$(MAIN).h
 	$(CC) $(CFLAGS) -o $@ -c $< $(PARAM)
 
-$(BINS)/$(SUB1).o: $(SRCS)/$(SUB1).cpp $(INCS)/$(SUB1).hpp
+$(BINS)/$(SUB1).o: $(SRCS)/$(SUB1).c $(INCS)/$(SUB1).h
 	$(CC) $(CFLAGS) -o $@ -c $< $(PARAM)
 
-$(BINS)/$(SUB2).o: $(SUB2)/$(SUB2).cpp $(SUB2)/$(SUB2).hpp
+$(BINS)/$(SUB2).o: $(SUB2)/$(SUB2).cpp $(SUB2)/$(SUB2).h
 	$(CC) $(CFLAGS) -o $@ -c $< $(PARAM)
 

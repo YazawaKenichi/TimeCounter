@@ -1,49 +1,69 @@
-#include "TimeCounter.hpp"
+#include "TimeCounter.h"
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-using namespace std;
-
-namespace TimeCounter
+char* addString(const char* str1, const char* str2)
 {
-    TimeCounter::TimeCounter(string _path) : start(chrono::system_clock::now()), stop(start)
+    size_t len1 = strlen(str1);
+    size_t len2 = strlen(str2);
+    char* result = (char*)malloc(len1 + len2 + 1);
+
+    if(result == NULL)
     {
-        this->path = _path;
+        fprintf(stderr, "メモリの確保に失敗しました\n");
+        exit(EXIT_FAILURE);
     }
 
-    //! 計測開始
-    void TimeCounter::startCounter()
-    {
-        //! 開始時刻の取得
-        this->start = chrono::system_clock::now();
-    }
+    // str1 をコピー
+    strcpy(result, str1);
+    // str2 を結合
+    strcat(result, str2);
 
-    //! 計測終了
-    void TimeCounter::stopCounter()
-    {
-        //! 終了時刻の取得
-        this->stop = chrono::system_clock::now();
-        //! 差分の算出
-        auto dur = this->stop - this->start;
-        auto ms = chrono::duration_cast<std::chrono::milliseconds>(dur).count();
-        //! 処理時間 ms 変数を std::chrono::seconds::rep 型から std::string 型に変換
-        std::string text = std::to_string(ms);
-        this->writef(text);
-    }
+    return result;
+}
 
-    void TimeCounter::printf(string msg)
-    {
-        cout << msg << endl;
-    }
+TimeCounter* create_time_counter(const char* path)
+{
+    TimeCounter* counter = new TimeCounter;
+    counter->path = path;
+    return counter;
+}
 
-    void TimeCounter::writef(string _text)
+void start_counter(TimeCounter* counter)
+{
+    counter->start = std::chrono::system_clock::now();
+}
+
+void stop_counter(TimeCounter* counter)
+{
+    counter->stop = std::chrono::system_clock::now();
+    auto dur = counter->stop - counter->start;
+    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(dur).count();
+    std::string text = std::to_string(ms);
+    write_file(counter, text.c_str());
+}
+
+void printf_message(const char* msg)
+{
+    std::cout << msg << std::endl;
+}
+
+void write_file(TimeCounter* counter, const char* text)
+{
+    std::fstream file;
+    file.open(counter->path, std::ios_base::app);
+    if (file.is_open())
     {
-        fstream file;
-        file.open(this->path, std::ios_base::app);
-        if (file.is_open())
-        {
-            string text = _text + "\r\n";
-            this->printf(text);
-            file.write(text.data(), text.size());
-        }
+        std::string message = addString(text, "\r\n");
+        printf_message(message.c_str());
+        file.write(message.data(), message.size());
     }
+}
+
+void delete_time_counter(TimeCounter* counter)
+{
+    delete counter;
 }
 
