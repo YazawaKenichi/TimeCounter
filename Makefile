@@ -2,7 +2,7 @@ MAIN = main
 SUB1 = sub1
 SUB2 = TimeCounter
 
-CC = g++
+CC = gcc
 EDITOR = vim
 EPARAM = -p
 SRCS = ./src
