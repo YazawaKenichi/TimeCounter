@@ -64,7 +64,7 @@ void write_file(TimeCounter* counter, const char* text)
 TimeCounter* create_time_counter(const char* path)
 {
     //! TimeCounter 構造体のポインタを作成
-    TimeCounter* counter = new TimeCounter;
+    TimeCounter* counter;
     //! 構造体ポインタに path を作成
     counter->path = path;
     //! 構造体ポインタを返す

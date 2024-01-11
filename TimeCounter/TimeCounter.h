@@ -4,12 +4,12 @@
 #include <stdio.h>
 #include <time.h>
 
-struct TimeCounter
+typedef struct TimeCounter_
 {
     time_t start;
     time_t stop;
     const char* path;
-};
+} TimeCounter;
 
 char* addString(const char* str1, const char* str2);
 const char* int_to_string(int value);
